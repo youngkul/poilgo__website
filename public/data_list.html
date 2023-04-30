@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>데이터 목록</title>
+    <link rel="stylesheet" href="/styles/data_list.css">
 </head>
 <body>
     <h1>운동 데이터 목록</h1>
@@ -140,6 +141,24 @@
             }
         });
     }
+    document.addEventListener('DOMContentLoaded', () => {
+    const tableRows = document.querySelectorAll('table tr:not(:first-child)');
+
+    tableRows.forEach((row) => {
+        row.addEventListener('mouseover', () => {
+            row.style.backgroundColor = '#e0e0e0';
+        });
+
+        row.addEventListener('mouseout', () => {
+            if (row.rowIndex % 2 === 0) {
+                row.style.backgroundColor = '#f2f2f2';
+            } else {
+                row.style.backgroundColor = '';
+            }
+        });
+    });
+});
+
     </script>
 </body>
 </html>

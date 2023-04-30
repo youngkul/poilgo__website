@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체중 기록</title>
+    <link rel="stylesheet" href="/styles/weight-record.css"> <!-- 스타일시트 연결 -->
+</head>
+<body>
+    <h1>체중 기록</h1>
+    <form id="weight-record-form">
+        <label for="date">날짜:</label>
+        <input type="date" id="date" name="date" required>
+        <br>
+        <label for="weight">체중(kg):</label>
+        <input type="number" id="weight" name="weight" step="0.1" min="0" required>
+        <br>
+        <button type="submit">기록하기</button>
+    </form>
+    <div id="weight-records"></div>
+    <script>
+        const userId = getCookie('6449ce4868bf771fc2b9fd02');
+        function getCookie(name) {
+  const value = "; " + document.cookie;
+  const parts = value.split("; " + name + "=");
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+      </script>
+    <script src="/scripts/weight-record.js"></script> <!-- 자바스크립트 연결 -->
+</body>
+</html>

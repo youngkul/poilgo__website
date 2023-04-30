@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>데이터 기록</title>
+    <link rel="stylesheet" href="/styles/record-data.css">
 </head>
 <body>
     <h1>운동 데이터 기록</h1>
@@ -67,6 +68,22 @@
         console.error('Error:', error);
         alert('데이터를 기록하는 데 실패했습니다. 다시 시도해주세요.');
     }
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const exerciseInput = document.querySelector('input[name="exercise"]');
+    const weightInput = document.querySelector('input[name="weight"]');
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    const checkInputs = () => {
+        if (exerciseInput.value.trim() !== '' && weightInput.value.trim() !== '') {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'disabled');
+        }
+    };
+
+    exerciseInput.addEventListener('input', checkInputs);
+    weightInput.addEventListener('input', checkInputs);
 });
 
     </script>

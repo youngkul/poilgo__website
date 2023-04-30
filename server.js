@@ -227,4 +227,39 @@ app.put('/api/records/:id', async (req, res) => {
       res.status(500).send('서버에서 오류가 발생했습니다.');
     }
   });
-  
+  app.get('/weight-record', (req, res) => {
+    res.sendFile(__dirname + '/public/weight-record.html');
+});
+app.post('/api/weights', async (req, res) => {
+    const { userId, date, weight } = req.body;
+    
+    try {
+        const user = await User.findOne({ email: userId });
+        if (user) {
+            user.weightHistory.push({ date, weight });
+            await user.save();
+            res.sendStatus(200);
+        } else {
+            res.status(500).send('사용자를 찾을 수 없습니다.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('서버에서 오류가 발생했습니다.');
+    }
+});
+
+app.get('/api/weights/:userId', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const user = await User.findById(userId);
+        if (user) {
+            res.json(user.weightHistory);
+        } else {
+            res.status(404).send('사용자를 찾을 수 없습니다.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('서버에서 오류가 발생했습니다.');
+    }
+});
