@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 기록</title>
+</head>
+<body>
+    <h1>운동 데이터 기록</h1>
+    <form id="record-form">
+        <label for="userName">사용자 이름:</label>
+        <input type="text" name="userName" id="userName" required>
+        <br><br>
+        <label for="userId">사용자 ID:</label>
+        <input type="text" name="userId" id="userId" required>
+        <br><br>
+        <label for="exercise">운동 종목:</label>
+        <select name="exercise" id="exercise">
+            <option value="snatch">Snatch</option>
+            <option value="clean_and_jerk">Clean & Jerk</option>
+            <option value="deadlift">Deadlift</option>
+            <option value="b_squat">B.Squat</option>
+        </select>
+        <br><br>
+        <label for="weight">무게 (kg):</label>
+        <input type="number" name="weight" id="weight" min="0" step="1" required>
+        <br><br>
+        <button type="submit">기록 추가</button>
+    </form>
+
+    <script>
+        document.getElementById('record-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const userName = document.getElementById('userName').value;
+    const userId = document.getElementById('userId').value;
+    const exercise = document.getElementById('exercise').value;
+    const weight = document.getElementById('weight').value;
+    const date = new Date().toISOString();
+
+    const data = {
+        userName: userName,
+        userId: userId,
+        exercise: exercise,
+        weight: weight,
+        date: date
+    };
+
+    try {
+        const response = await fetch('/api/records', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            // 데이터가 성공적으로 기록되었다는 메시지를 표시한 후, 운동 데이터 목록 페이지로 이동합니다.
+            alert('데이터가 성공적으로 기록되었습니다.');
+            window.location.href = '/data_list.html';
+        } else {
+            alert('데이터를 기록하는 데 실패했습니다. 다시 시도해주세요.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('데이터를 기록하는 데 실패했습니다. 다시 시도해주세요.');
+    }
+});
+
+    </script>
+</body>
+</html>

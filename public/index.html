@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="/res/Soleil.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          // 쿠키에서 userId 값을 가져옵니다.
+          const userId = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('userId='));
+
+          // 로그인 상태에 따라 텍스트를 변경합니다.
+          if (userId) {
+              document.getElementById('login-link').textContent = '로그아웃';
+              document.getElementById('login-link').href = '/logout';
+          }
+      });
+  </script>
+  
+  
+  
+  
+</head>
+
+<body>
+    <div class="nav">
+        <h2>포천일고 역도부 웹사이트</h2>
+        <div class="menu">
+          <p><a href="image_list.html">이미지 목록 보기</a></p>
+          <p><a href="data_list.html">데이터 목록 보기</a></p>
+          <p><a href="introduce">역도부소개</a></p>
+          <p><a href="/login.html" id="login-link">로그인</a></p>
+          <p><a href="signup.html">회원가입</a></p>
+          
+        </div>
+      </div>
+      
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Weight lifting</h1>
+          <p>사진,동영상 및 데이터 업로드</p>
+          <div class="buttons">
+            <a class="button primary" href="/upload-media">사진,동영상</a>
+            <a class="button secondary" href="/record-data">데이터</a>
+          </div>
+        </div>
+        <div class="blob-cont">
+          <div class="yellow blob"></div>
+          <div class="red blob"></div>
+          <div class="green blob"></div>
+        </div>
+      </div>
+      
+      <svg>
+        <filter id='noiseFilter'>
+          <feTurbulence 
+            type='fractalNoise' 
+            baseFrequency='6' 
+            stitchTiles='stitch'/>
+           <feColorMatrix in="colorNoise" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" />
+              <feComposite operator="in" in2="SourceGraphic" result="monoNoise"/>
+              <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
+        </filter>
+      </svg>
+      
+      <!-- Not required -->
+      <a href="https://www.youtube.com/watch?v=_ZFghigBmqo" target="_blank" class="youtube">Watch on YouTube</a>
+</body>
+</html>

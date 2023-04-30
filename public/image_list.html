@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 목록</title>
+    <style>
+        .image-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          grid-gap: 10px;
+        }
+        .image-grid img {
+          width: 100%;
+          height: auto;
+          cursor: pointer;
+        }
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+        }
+        .modal img {
+          max-width: 80%;
+          max-height: 80%;
+        }
+      </style>
+      
+</head>
+<body>
+    <body>
+        <h1>업로드된 이미지 목록</h1>
+        <div class="image-grid" id="image-list"></div>
+        <div class="modal" id="modal">
+          <img src="" alt="업로드된 이미지 확대" />
+        </div>
+      
+        <script>
+          // 기존의 fetchImages 함수를 수정
+        </script>
+      </body>
+      
+    <script>
+        async function fetchImages() {
+  const response = await fetch('/api/images');
+  const images = await response.json();
+  const imageListElement = document.getElementById('image-list');
+  const modalElement = document.getElementById('modal');
+  const modalImageElement = modalElement.querySelector('img');
+
+  images.forEach(image => {
+    const imgElement = document.createElement('img');
+    imgElement.src = `/uploads/${image}`;
+    imgElement.alt = '업로드된 이미지';
+    imgElement.addEventListener('click', () => {
+      modalImageElement.src = imgElement.src;
+      modalElement.style.display = 'flex';
+    });
+
+    imageListElement.appendChild(imgElement);
+  });
+
+  modalElement.addEventListener('click', () => {
+    modalElement.style.display = 'none';
+  });
+}
+
+
+fetchImages();
+
+    </script>
+</body>
+</html>

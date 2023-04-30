@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미디어 업로드</title>
+</head>
+<body>
+    <h1>사진 및 동영상 업로드</h1>
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">사진 또는 동영상 선택:</label>
+        <input type="file" id="file" name="file" required>
+        <br>
+        <button type="submit">업로드</button>
+    </form>
+    
+</body>
+</html>
